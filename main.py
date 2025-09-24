@@ -1,3 +1,5 @@
+import json
+
 def ngram(filename: str):
     text = []
     unigram = {}
@@ -12,23 +14,33 @@ def ngram(filename: str):
     # Get unigram probabilities
     wcount = {}
     for word in text:
-        if word in unigram:
+        if word in wcount:
             wcount[word] += 1
         else:
             wcount[word] = 1
-    word_count = len(wcount.keys())
+    word_count = len(text)
     for key in wcount.keys():
+        # P(w) = # w / # all words
         unigram[key] = wcount[key] / word_count
 
     # Get bigram probabilities
-    bigramzip = [(s1, s2) for s1, s2 in zip(text, text[1:])]
+    # bigramzip = [(s1, s2) for s1, s2 in zip(text, text[1:])]
+    bigramzip = []
+    for i in range(0, len(text) - 1):
+        # bigramzip.append((text[i], text[i + 1]))
+        bigramzip.append(f"{text[i]} {text[i + 1]}")
+    bcount = {}
     for bi in bigramzip:
-        if bi in bigram:
-            bigram[bi] += 1
+        # gets each tuple bi = (w1, w2)
+        if bi in bcount:
+            bcount[bi] += 1
         else:
-            bigram[bi] = 1
-    for key in bigram.keys():
-        bigram[key] = bigram[key] / word_count
+            bcount[bi] = 1
+    for key in bcount.keys():
+        # P(w2 | w1) = # (w1, w2) / # w1
+        bigram[key] = bcount[key] / wcount[key.split(' ')[0]]
+    bigram_str = {str(k):v for k,v in bigram.items()}
+    print(bigram_str)
 
 def train():
     ngram('train.txt')
