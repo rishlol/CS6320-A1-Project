@@ -1,3 +1,7 @@
+**By Anvar: Some helper template for report structuring:**
+
+
+
 <img width="2045" height="516" alt="image" src="https://github.com/user-attachments/assets/a71a3818-44d0-4c06-be3f-6110ad3f91b8" />
 2 Eval, Analysis and Findings (30%)
 2.1 Perplexity Report
