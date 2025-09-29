@@ -27,13 +27,13 @@ def ngram(filename: str):
         bigramzip.append(f"{text[i]} {text[i + 1]}")
     bcount = {}
     for bi in bigramzip:
-        # gets each tuple bi = (w1, w2)
+        # gets each bigram = (w1, w2)
         if bi in bcount:
             bcount[bi] += 1
         else:
             bcount[bi] = 1
     for key in bcount.keys():
-        # P(w2 | w1) = # (w1, w2) / # w1
+        # P(w2 | w1) = # "w1 w2" / # w1
         bigram[key] = bcount[key] / wcount[key.split(' ')[0]]
     print(bigram)
 
